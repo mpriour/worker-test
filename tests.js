@@ -49,18 +49,23 @@ function fillArrayBuff(length){
   return buff;
 }
 
+var str = b64img.slice(-64).replace(/\//g,' ');
+var longStr = b64img.slice(-15000).replace(/\//g,'\n').replace(/\+/g,' ');
+var int = parseInt(str.length,10);
+var float = longStr.length * Math.PI;
+
 var echoTests = [
-  ['short string', 'Hello World'],
-  ['int', parseInt(1e6,10)],
-  ['float', Math.PI*1000.1],
-  ['array', [100, 'foo', 7, 'bar', 67892.34, 'baz', true]],
-  ['object', {foo: 100, bar: 'baz', baz: 67892.34, boom: true}],
-  ['nested object', {foo: {value: 100}, bar: {obj: {arr: [Math.PI, 'abc'], str: 'Hello World'}}, baz: [{val:1}, {val: {n:2}}]}],
-  ['ArrayBuffer', fillArrayBuff(2048)],
-  ['Uint8Array', new Uint8Array(fillArrayBuff(2048))],
+  ['short string', str],
+  ['int', int],
+  ['float', float],
+  ['array', [int, str, float, longStr]],
+  ['object', {foo: int, bar: str, baz: float, boom: longStr}],
+  ['nested object', {foo: {value: int}, bar: {obj: {arr: [float, 'abc'], str: str}}, baz: [{val:1}, {val: {n:longStr}}]}],
+  ['ArrayBuffer', fillArrayBuff(65536)],
+  ['Uint8Array', new Uint8Array(fillArrayBuff(65536))],
   ['Int32Array', new Int32Array(fillArrayBuff(65536))],
   ['Float64Array', new Float64Array(fillArrayBuff(65536))],
-  ['long text', b64img.slice(-15000).replace(/\//g,'\n').replace(/\+/g,' ')]
+  ['long text', longStr]
 ];
 
 function runEchoTest(i, cb) {
