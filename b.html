@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+  <style>
+  #c{
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  </style>
+</head>
+<body>
+
+<canvas id="c" width="2007" height="1329"></canvas>
+<p>Bee photo courtesy of supersum via <a href="https://www.flickr.com/photos/supersum/5853984700/">Flickr</a></p>
+<img src="assets/bee-large.jpg" id="b">
+</body>
+  <script>
+    im = document.getElementById('b');
+    cnv = document.getElementById('c');
+    ctx = cnv.getContext('2d');
+    ctx.drawImage(im,0,0);
+    src = cnv.toDataURL('image/jpeg');
+    im.src = src;
+    console.log(src);
+    console.log(src.length);
+  </script>
+</html>
